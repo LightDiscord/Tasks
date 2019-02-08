@@ -6,7 +6,7 @@
         <div class="level-left">
           <div class="level-item">
             <p class="subtitle is-5">
-              You have <strong>0</strong> remaining tasks
+              You have <strong>{{ count }}</strong> remaining tasks
             </p>
           </div>
         </div>
@@ -36,3 +36,19 @@ a.router-link-exact-active
   font-weight: bold
   color: $text
 </style>
+
+<script>
+import { createNamespacedHelpers } from 'vuex';
+
+const tasks = createNamespacedHelpers('tasks');
+
+export default {
+  computed: {
+    ...tasks.mapGetters(['remaining']),
+
+    count() {
+      return this.remaining.length
+    }
+  }
+}
+</script>
