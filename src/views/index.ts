@@ -9,8 +9,18 @@ export const Router = new VueRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: () => import('./Home.vue'),
+      name: 'tasks',
+      component: () => import('./Tasks.vue'),
+    },
+    {
+      path: '/exchanges',
+      name: 'exchanges',
+      component: () => import('./Exchanges.vue'),
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('./Settings.vue'),
     },
   ],
 });
