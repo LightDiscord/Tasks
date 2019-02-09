@@ -1,16 +1,8 @@
 <template>
   <div>
-    <div class="field">
-      <div class="control" :class="{ 'is-loading': creating }">
-        <input
-          type="text"
-          class="input"
-          v-model="input"
-          @keyup.enter="createTask"
-          :readonly="creating"
-          placeholder="Enter to create a new task">
-      </div>
-    </div>
+    <h1 class="title">Tasks</h1>
+
+    <TaskInput />
 
     <template v-for="(task, index) in tasks">
       <hr :key="index">
@@ -20,28 +12,17 @@
 </template>
 
 <script>
-import Task from '@/components/Task';
+import { Task, TaskInput } from '@/components/tasks';
 import { createNamespacedHelpers } from 'vuex';
 
 const tasks = createNamespacedHelpers('tasks');
 
 export default {
   name: 'tasks',
-  data: () => ({
-    creating: false,
-    input: ''
-  }),
   computed: tasks.mapState(['tasks']),
-  methods: {
-    ...tasks.mapActions(['create']),
-    createTask() {
-      this.creating = true;
-      this.create(this.input)
-        .then(() => (this.creating = false, this.input = ''));
-    },
-  },
   components: {
-    Task
+    Task,
+    TaskInput
   }
 }
 </script>
