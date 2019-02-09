@@ -5,7 +5,12 @@
         <time :datetime="creationIso">{{ creationString }}</time>
     </div>
     <div>
-      <a class="button is-danger" @click="remove">Remove</a>
+      <a class="button is-danger"
+        :class="{ 'is-loading': removing }"
+        :disabled="removing"
+        @click="remove">
+        Remove
+      </a>
     </div>
   </div>
 </template>
@@ -17,6 +22,9 @@ const tasks = createNamespacedHelpers('tasks');
 
 export default {
   props: ['task'],
+  data: () => ({
+    removing: false
+  }),
   computed: {
     creationIso() {
       return (new Date(this.task.creation)).toISOString();
@@ -27,12 +35,14 @@ export default {
     }
   },
   methods: {
-    ...tasks.mapMutations({
+    ...tasks.mapActions({
       delete: 'remove'
     }),
 
     remove() {
+      this.removing = true;
       this.delete(this.task.id)
+        .then(() => (this.removing = false));
     }
   }
 }
