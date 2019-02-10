@@ -20,6 +20,10 @@ export default {
   }),
   methods: {
     create() {
+      if (this.input.length === 0) {
+        return;
+      }
+
       this.creating = true;
       this.$store.dispatch('tasks/create', this.input)
         .then(() => (this.creating = false, this.input = ''))
