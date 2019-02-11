@@ -16,6 +16,7 @@
     "bulma": "^0.7.4",
     "localforage": "^1.7.3",
     "register-service-worker": "^1.5.2",
+    "simple-peer": "^9.2.1",
     "uuid": "^3.3.2",
     "vue": "^2.5.22",
     "vue-router": "^3.0.1",
