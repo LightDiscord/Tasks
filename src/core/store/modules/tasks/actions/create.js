@@ -1,7 +1,6 @@
 import uuid from 'uuid/v1';
-import { Database } from '../../..';
 
-export default ({ commit }, text) => {
+export default ({ dispatch }, text) => {
   const task = {
     id: uuid(),
     creation: Date.now(),
@@ -9,6 +8,5 @@ export default ({ commit }, text) => {
     text
   };
 
-  return Database.setItem(task.id, task)
-    .then(() => commit('create', task));
+  return dispatch('add', task);
 }
